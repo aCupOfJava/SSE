@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script type="text/javascript">
+        //需要判断浏览器是否支持EventSource，可以去w3c进行查看
+        if ('EventSource' in window) {
+            var source = new EventSource('/sse/getDate');
+            // source.onopen = function (event) {
+            //     console.info(event);
+            //
+            // };
+            source.onmessage = function (event) {
+                console.info(event);
+                console.info(source);
+                document.getElementById('result').innerText = event.data;
+            };
+            // source.onerror = function () {
+            //     document.getElementById('result').innerText = "ERROR";
+            // }
+        } else {
+            document.getElementById('result').innerText = "浏览器不支持SSE";
+        }
+
+    </script>
+</head>
+
+<body>
+<div id="result"></div>
+</body>
+
+</html>
